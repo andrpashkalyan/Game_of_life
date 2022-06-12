@@ -1,6 +1,28 @@
 var colors = require('colors'); // https://www.npmjs.com/package/colors
 var blessed = require("blessed"); // https://www.npmjs.com/package/blessed
 
+function random(min, max) { // Рандом лоігійка для майбутнього заповнення
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум і мінімум включається
+}
+
+ class field_completion{
+  #height;
+  #width;
+  #arr_current;
+  #arr_old;
+  constructor(height, width) {
+      this.#height = height;
+      this.#width = width;
+      this.#arr_current = new Array(height);
+      this.#arr_old = new Array(height);
+      for (var i = 0; i < height; i++) {
+        this.#arr_current[i] = new Array(width);
+        this.#arr_old[i] = new Array(width);
+      }
+      this.mix();
+    }
 
 var main_field_box = blessed.box({
     top: "20%",
