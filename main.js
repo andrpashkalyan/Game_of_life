@@ -53,6 +53,24 @@ function random(min, max) { // Рандом дял клітин
       }
     }
 
+        cout_arr(){ // Виведення
+      this.clear();
+      for (var i = 0; i < this.#height; i++) {
+        for (var j = 0; j < this.#width; j++) {
+          if (this.#arr_current[i][j] == 1) {
+            // alive
+            main_field_box.setContent(main_field_box.content + "  ".bgCyan);
+          }
+          else {
+            //dead
+              main_field_box.setContent(main_field_box.content + "  ");
+          }
+        }
+        main_field_box.setContent(main_field_box.content + "\n");
+      }
+      screen.render();
+    }
+
   var main_field_box = blessed.box({
   top: "20%",
   width: "100%",
