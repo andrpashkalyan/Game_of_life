@@ -1,10 +1,10 @@
 var colors = require('colors'); // https://www.npmjs.com/package/colors
 var blessed = require("blessed"); // https://www.npmjs.com/package/blessed
 
-function random(min, max) { // Рандом лоігійка для майбутнього заповнення
+function random(min, max) { // Рандом дял клітин
   min = Math.ceil(min);
   max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min; //Максимум і мінімум включається
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
  class field_completion{
@@ -24,16 +24,46 @@ function random(min, max) { // Рандом лоігійка для майбут
       this.mix();
     }
 
-var main_field_box = blessed.box({
-    top: "20%",
-    width: "100%",
-    left: "center",
-    height: "100%",
-    tags: true,
-    style: {
-      bg: "red",
-    },
-  });
+    clear() { 
+      main_field_box.setContent(""); //очистити 
+      screen.render();
+    }
+
+    
+
+    mix(){ 
+      for(var i = 0; i< this.#height; i++){   //заповнення
+        for(var j = 0; j< this.#width; j++){
+          this.#arr_current[i][j] = random(0, 3);
+            if(this.#arr_current[i][j] == 1) this.#arr_current[i][j] = 1;
+            else this.#arr_current[i][j] = 0;
+
+
+            this.#arr_current[1][1] = 1;
+            this.#arr_current[1][2] = 1;
+            this.#arr_current[2][1] = 1;
+            this.#arr_current[2][2] = 1;
+
+
+            this.#arr_current[13][13] = 1;
+            this.#arr_current[13][14] = 1;
+            this.#arr_current[14][13] = 1;
+            this.#arr_current[14][14] = 1;
+        }
+      }
+    }
+
+  var main_field_box = blessed.box({
+  top: "20%",
+  width: "100%",
+  left: "center",
+  height: "100%",
+  tags: true,
+  style: {
+    bg: "red",
+  },
+});
+
   var form_1 = blessed.form({
     parent: screen,
     keys: true,
